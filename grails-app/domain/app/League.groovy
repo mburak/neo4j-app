@@ -1,5 +1,8 @@
 package app
 
+import grails.persistence.Entity
+
+@Entity
 class League {
 	
 	static mapWith = "neo4j"

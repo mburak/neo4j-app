@@ -79,4 +79,10 @@ class LeagueController {
 
         respond map
     }
+
+    def cypherLeagues() {
+        List leagues = League.cypherStatic("MATCH (n:League) RETURN n")
+
+        respond leagues
+    }
 }

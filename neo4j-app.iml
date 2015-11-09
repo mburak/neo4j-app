@@ -56,13 +56,10 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-simple/5.0.0.BUILD-SNAPSHOT/grails-datastore-simple-5.0.0.BUILD-SNAPSHOT.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm/5.0.0.BUILD-SNAPSHOT/grails-datastore-gorm-5.0.0.BUILD-SNAPSHOT.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-core/5.0.0.BUILD-SNAPSHOT/grails-datastore-core-5.0.0.BUILD-SNAPSHOT.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/bertramlabs/plugins/asset-pipeline-core/2.5.5/asset-pipeline-core-2.5.5.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-reflect/2.11.7/scala-reflect-2.11.7.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.11.7/scala-library-2.11.7.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-cypher/2.3.0/neo4j-cypher-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-graph-matching/2.3.0/neo4j-graph-matching-2.3.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-udc/2.3.0/neo4j-udc-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-graph-algo/2.3.0/neo4j-graph-algo-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.6.2/lucene-core-3.6.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-lucene-index/2.3.0/neo4j-lucene-index-2.3.0.jar!/" />
@@ -96,7 +93,6 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-web/5.0.0.BUILD-SNAPSHOT/grails-datastore-web-5.0.0.BUILD-SNAPSHOT.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-logging/2.3.0/neo4j-logging-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-csv/2.3.0/neo4j-csv-2.3.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-io/2.3.0/neo4j-io-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-function/2.3.0/neo4j-function-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-unsafe/2.3.0/neo4j-unsafe-2.3.0.jar!/" />
@@ -112,7 +108,6 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-cypher-compiler-2.3/2.3.0/neo4j-cypher-compiler-2.3-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-cypher-compiler-2.2_2.11/2.2.6/neo4j-cypher-compiler-2.2_2.11-2.2.6.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-cypher-compiler-1.9_2.11/2.0.5/neo4j-cypher-compiler-1.9_2.11-2.0.5.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/ow2/asm/asm/5.0.2/asm-5.0.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-codegen/2.3.0/neo4j-codegen-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-test-support/1.0.2-grails-2.4/grails-datastore-test-support-1.0.2-grails-2.4.jar!/" />
@@ -124,6 +119,14 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/7.0.55/tomcat-embed-el-7.0.55.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.55/tomcat-embed-jasper-7.0.55.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.55/tomcat-catalina-ant-7.0.55.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/bertramlabs/plugins/asset-pipeline-core/2.5.5/asset-pipeline-core-2.5.5.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/neo4j/neo4j-udc/2.3.0/neo4j-udc-2.3.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-plugin-support/3.1.5.RELEASE/grails-datastore-gorm-plugin-support-3.1.5.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate-core/3.1.5.RELEASE/grails-datastore-gorm-hibernate-core-3.1.5.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate4/3.1.5.RELEASE/grails-datastore-gorm-hibernate4-3.1.5.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/ow2/asm/asm/5.0.2/asm-5.0.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
