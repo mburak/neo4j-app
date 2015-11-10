@@ -4,6 +4,7 @@ class Player extends AbstractGraphDomain {
 
     String name
     String strNationality
+    Nationality nationality
 
     static transients = ["nationality"]
 

@@ -25,37 +25,35 @@ class LeagueController {
         respond league
     }
 
-    def update(League league) {
-        if (league == null) {
-            render status: NOT_FOUND
-            return
-        }
-
-        league.clubs.first().name = "River"
-
-        league.validate()
-        if (league.hasErrors()) {
-            render status: NOT_ACCEPTABLE
-            return
-        }
-
-        league.save flush: true, validate: false
-        respond league, [status: CREATED]
-    }
-
-//    @Transactional
-//    def update() {
-//        League instance = League.get(params.id)
-//        if (instance == null) {
+//    def update(League league) {
+//        if (league == null) {
 //            render status: NOT_FOUND
 //            return
 //        }
 //
-//        instance.properties = request
-//        instance.save flush: true, validate: false
+//        league.validate()
+//        if (league.hasErrors()) {
+//            render status: NOT_ACCEPTABLE
+//            return
+//        }
 //
-//        respond instance, [status: OK]
+//        league.save flush: true, validate: false
+//        respond league, [status: CREATED]
 //    }
+
+    @Transactional
+    def update() {
+        League instance = League.get(params.id)
+        if (instance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        instance.properties = request
+        instance.save flush: true, validate: false
+
+        respond instance, [status: OK]
+    }
 
     def addItalianLeague() {
         new League(name: "Italian Serie A").addToClubs(new Club(name: "AC Milan")).save()

@@ -1,6 +1,6 @@
 package app
 
-abstract class Nationality {
+class Nationality implements Serializable {
 
     static mapWith = "none"
 
