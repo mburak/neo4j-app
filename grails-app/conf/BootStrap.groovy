@@ -36,8 +36,12 @@ class BootStrap {
 	    		clubs?.each() {String name ->
 					Player player1 = new Player(name: "Messi", nationality: new NativeNationality(name: 'ARG'))
 					Player player2 = new Player(name: "Ronaldo", nationality: new NativeNationality(name: 'POR'))
-	    			Club club = new Club(name: name, players: [player1, player2], big: 'yeah')
-	    			league.addToClubs(club)
+					Player player3 = new Player(name: "Neymar")
+	    			Club club = new Club(name: name, big: 'yeah')
+	    			club.addToPlayers(player1)
+					club.addToPlayers(player2)
+					club.addToPlayers(player3)
+					league.addToClubs(club)
 	    		}
 	    		league.save()
 	    	}

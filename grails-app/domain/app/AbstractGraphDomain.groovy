@@ -1,6 +1,6 @@
 package app
 
-class AbstractGraphDomain {
+class AbstractGraphDomain extends AbstractBaseDomain {
 
     static mapWith = "neo4j"
 

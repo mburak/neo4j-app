@@ -38,4 +38,11 @@ class ClubController {
         respond club, [status: CREATED]
     }
 
+    @Transactional(readOnly = true)
+    def validate(Club club) {
+        club.validate()
+
+        respond club
+    }
+
 }

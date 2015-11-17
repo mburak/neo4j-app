@@ -62,6 +62,6 @@ grails.project.dependency.resolution = {
 		compile ":neo4j:5.0.0.BUILD-SNAPSHOT"
 		
         // plugins needed at runtime but not for compilation
-        //runtime ":hibernate4:4.3.10" // or ":hibernate:3.6.10.18"
+        runtime ":hibernate4:5.0.0.BUILD-SNAPSHOT"
     }
 }

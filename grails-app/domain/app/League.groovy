@@ -1,25 +1,31 @@
 package app
 
 import grails.persistence.Entity
+import org.grails.datastore.gorm.neo4j.GraphPersistentEntity
 
 @Entity
 class League {
-	
-	static mapWith = "neo4j"
 
-	String name 
-	Date dateCreated
+    static mapWith = "neo4j"
+
+    String name
+    Date dateCreated
     Date lastUpdated
 
-	List<Club> clubs = []
+    List<Club> clubs = []
 
-	static hasMany = [clubs: Club, tags: Tag]
+    static hasMany = [clubs: Club, tags: Tag]
 
-	static constraints = {
-		name blank: false, unique: true
-	}
+    static constraints = {
+        name blank: false, unique: true
+    }
 
-	//static mapping = {
-	//	tags fetch: "eager"
-	//}
+    //static mapping = {
+    //	tags fetch: "eager"
+    //}
+    static mapping = {
+        labels { GraphPersistentEntity pe, instance ->
+            "`${instance?.tags?.findAll()?.collect { it.name }?.join(',')}`"
+        }
+    }
 }
