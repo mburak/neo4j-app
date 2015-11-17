@@ -1,8 +1,8 @@
 package app
 
-class Nationality implements Serializable {
+abstract class Nationality implements Serializable {
 
-    static mapWith = "none"
+    static mapWith = "neo4j"
 
     String name
 
