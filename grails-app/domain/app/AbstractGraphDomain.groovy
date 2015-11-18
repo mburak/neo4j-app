@@ -1,7 +1,14 @@
 package app
 
-class AbstractGraphDomain extends AbstractBaseDomain {
+import org.grails.datastore.gorm.neo4j.GraphPersistentEntity
+
+abstract class AbstractGraphDomain extends AbstractBaseDomain {
 
     static mapWith = "neo4j"
 
+    static mapping = {
+        labels { GraphPersistentEntity pe, instance ->
+            "`aaaa`"
+        }
+    }
 }

@@ -45,7 +45,11 @@ class BootStrap {
 	    		}
 	    		league.save()
 	    	}
-		}    	
+		}
+
+		String query = "MATCH (n:League) WHERE n.name = {1} RETURN n"
+		League spaLeague = League.find(query, ["Spanish Liga"])
+		log.debug("Fetched league: ${spaLeague.name}")
     }
 
     private void destroyUEFA() {

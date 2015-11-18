@@ -41,7 +41,7 @@ grails.project.dependency.resolution = {
         mavenRepo "http://repo.grails.org/grails/core"
     }
 
-    def neo4jVersion = "2.3.0"
+    def neo4jVersion = "2.3.1"
 
     dependencies {
         // Neo4j-shell
@@ -60,7 +60,7 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:2.5.7"
 
 		compile ":neo4j:5.0.0.BUILD-SNAPSHOT"
-		
+
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:5.0.0.BUILD-SNAPSHOT"
     }

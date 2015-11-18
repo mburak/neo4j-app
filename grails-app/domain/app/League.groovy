@@ -1,14 +1,11 @@
 package app
 
-import grails.persistence.Entity
 import org.grails.datastore.gorm.neo4j.GraphPersistentEntity
 
-@Entity
-class League {
-
-    static mapWith = "neo4j"
+class League extends AbstractLeague {
 
     String name
+
     Date dateCreated
     Date lastUpdated
 
