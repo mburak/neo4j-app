@@ -8,6 +8,7 @@ class UrlMappings {
 		"/leagues/players"(controller: "league", action: "players")
 		"/leagues/cypherLeagues"(controller: "league", action: "cypherLeagues")
 		"/clubs/$id/validate"(controller: "club", action: "validate", method: "PUT")
+		"/clubs/addPlayer"(controller: "club", action: "addPlayer")
 
         "500"(view:'/error')
 	}

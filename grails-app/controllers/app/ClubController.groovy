@@ -45,4 +45,11 @@ class ClubController {
         respond club
     }
 
+    def addPlayer() {
+        Club club = Club.list().get(0)
+        club.name = club.name + "a"
+        //club.addToPlayers(new Player(name: "Maradona"))
+        club.validate()
+    }
+
 }

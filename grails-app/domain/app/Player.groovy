@@ -1,5 +1,7 @@
 package app
 
+import org.grails.datastore.gorm.neo4j.GraphPersistentEntity
+
 class Player extends AbstractGraphDomain {
 
     String name
@@ -22,4 +24,11 @@ class Player extends AbstractGraphDomain {
         strNationality nullable: false
     }
 
+    static mapping = {
+        labels { GraphPersistentEntity pe, Player instance ->
+            if (instance.club) {
+                "`club_${instance.club.name}`"
+            }
+        }
+    }
 }

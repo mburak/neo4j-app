@@ -1,5 +1,7 @@
 package app
 
+import org.grails.datastore.gorm.neo4j.GraphPersistentEntity
+
 import grails.persistence.Entity
 
 @Entity
@@ -11,6 +13,7 @@ class Club extends AbstractGraphDomain {
     Date dateCreated
     Date lastUpdated
     String big
+    Country country
 
     static belongsTo = [league: League]
 
@@ -18,6 +21,7 @@ class Club extends AbstractGraphDomain {
 
     static constraints = {
         name blank: false, unique: true
+        country nullable: true
     }
 
     static transients = ['big']
@@ -30,4 +34,11 @@ class Club extends AbstractGraphDomain {
         this.big = big
     }
 
+    static mapping = {
+        labels { GraphPersistentEntity pe, Club instance ->
+            if (instance.country) {
+                "`country_${instance.country.name}`"
+            }
+        }
+    }
 }

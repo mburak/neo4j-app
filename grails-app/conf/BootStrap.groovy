@@ -1,3 +1,4 @@
+import app.Country
 import app.League
 import app.Club
 import app.NativeNationality
@@ -30,6 +31,7 @@ class BootStrap {
     	}
 
 	    if (League.count() == 0) {
+			Country country = new Country(name: 'Argentina').save()
 	    	uefa.each() {entry ->
 	    		League league = new League(name: entry.key).addToTags(Tag.findByName("UEFA"))
 	    		List<String> clubs = entry.value
@@ -37,7 +39,7 @@ class BootStrap {
 					Player player1 = new Player(name: "Messi", nationality: new NativeNationality(name: 'ARG'))
 					Player player2 = new Player(name: "Ronaldo", nationality: new NativeNationality(name: 'POR'))
 					Player player3 = new Player(name: "Neymar")
-	    			Club club = new Club(name: name, big: 'yeah')
+	    			Club club = new Club(name: name, big: 'yeah', country: country)
 	    			club.addToPlayers(player1)
 					club.addToPlayers(player2)
 					club.addToPlayers(player3)
