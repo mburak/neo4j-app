@@ -59,9 +59,9 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.8'
         compile ":asset-pipeline:2.5.7"
 
-		compile ":neo4j:5.0.0.BUILD-SNAPSHOT"
+		compile ":neo4j:5.0.0.RC2"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:5.0.0.BUILD-SNAPSHOT"
+        runtime ":hibernate4:5.0.0.RC2"
     }
 }

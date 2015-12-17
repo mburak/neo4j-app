@@ -21,7 +21,7 @@ class Player extends AbstractGraphDomain {
     }
 
     static constraints = {
-        strNationality nullable: false
+        strNationality nullable: true
     }
 
     static mapping = {
