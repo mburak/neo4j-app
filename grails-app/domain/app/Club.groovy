@@ -34,11 +34,11 @@ class Club extends AbstractGraphDomain {
         this.big = big
     }
 
-    static mapping = {
-        labels { GraphPersistentEntity pe, Club instance ->
-            if (instance.country) {
-                "`country_${instance.country.name}`"
-            }
-        }
-    }
+//    static mapping = {
+//        labels { GraphPersistentEntity pe, Club instance ->
+//            if (instance.country) {
+//                "`country_${instance.country.name}`"
+//            }
+//        }
+//    }
 }

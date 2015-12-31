@@ -8,8 +8,8 @@ abstract class AbstractGraphDomain extends AbstractBaseDomain {
 
     static mapping = {
         dynamicAssociations true
-        labels { GraphPersistentEntity pe, instance ->
-            "`aaaa`"
-        }
+//        labels { GraphPersistentEntity pe, instance ->
+//            "`aaaa`"
+//        }
     }
 }

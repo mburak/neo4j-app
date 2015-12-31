@@ -53,6 +53,9 @@ class BootStrap {
             Club barcelona = Club.findByName("FC Barcelona")
             barcelona.rival = Club.findByName("Real Madrid CF")
             barcelona.save(failOnError: true)
+            barcelona.discard()
+            Club nonCachedBarcelona = Club.findByName("FC Barcelona")
+            assert nonCachedBarcelona.rival == Club.findByName("Real Madrid CF")
         }
 
 //		String query = "MATCH (n:League) WHERE n.name = {1} RETURN n"
