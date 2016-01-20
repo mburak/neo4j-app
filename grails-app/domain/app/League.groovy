@@ -14,7 +14,7 @@ class League extends AbstractLeague {
     static hasMany = [clubs: Club, tags: Tag]
 
     static constraints = {
-        name blank: false, unique: true
+        name blank: false//, unique: true
     }
 
     //static mapping = {

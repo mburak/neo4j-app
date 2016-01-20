@@ -65,6 +65,8 @@ class BootStrap {
 
                     @Override
                     public void afterCommit() {
+                        new GetNode(league.id, league.class).run()
+                        log.debug("runned runnable on same thead")
                         Executor executor = Executors.newFixedThreadPool(1)
                         executor.execute(new GetNode(league.id, league.class))
                     }
@@ -111,10 +113,11 @@ public class GetNode implements Runnable {
     }
 
     public void run() {
-        Club.withTransaction {
-            log.debug("Looking for ${id} of ${clazz}")
+        Club.withTransaction(readOnly: true) {
+            log.debug("Looking node with ${id} of class ${clazz}")
             def nodeById = clazz.get(this.id)
             assert nodeById != null
+            log.debug("Found node with ${id} of class ${clazz}")
         }
     }
 }
