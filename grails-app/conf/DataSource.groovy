@@ -19,8 +19,8 @@ grails {
         options = [
             remote_shell_enabled      : 'true',
             allow_store_upgrade       : 'true',
-            relationship_auto_indexing: 'true',
-            node_auto_indexing        : 'true',
+            relationship_auto_indexing: 'false',
+            node_auto_indexing        : 'false',
             dump_configuration        : 'true',
             keep_logical_logs         : 'false'
         ]

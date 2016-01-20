@@ -5,6 +5,14 @@ import app.NativeNationality
 import app.Player
 import app.Tag
 
+import javax.transaction.Transaction
+
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
+
+import org.springframework.transaction.support.TransactionSynchronizationAdapter
+import org.springframework.transaction.support.TransactionSynchronizationManager
+
 class BootStrap {
 
     def uefaService
@@ -34,28 +42,45 @@ class BootStrap {
             Country country = new Country(name: 'Argentina').save()
             uefa.each() { entry ->
                 League league = new League(name: entry.key).addToTags(Tag.findByName("UEFA"))
-                List<String> clubs = entry.value
-                clubs?.each() { String name ->
-                    Player player1 = new Player(name: "Messi", nationality: new NativeNationality(name: 'ARG'))
-                    Player player2 = new Player(name: "Ronaldo", nationality: new NativeNationality(name: 'POR'))
-                    Player player3 = new Player(name: "Neymar")
-                    Club club = new Club(name: name, big: 'yeah', country: country)
-                    club.addToPlayers(player1)
-                    club.addToPlayers(player2)
-                    club.addToPlayers(player3)
-                    league.addToClubs(club)
+                League.withTransaction {
+                    List<String> clubs = entry.value
+                    clubs?.each() { String name ->
+                        Player player1 = new Player(name: "Messi", nationality: new NativeNationality(name: 'ARG'))
+                        Player player2 = new Player(name: "Ronaldo", nationality: new NativeNationality(name: 'POR'))
+                        Player player3 = new Player(name: "Neymar")
+                        Club club = new Club(name: name, big: 'yeah', country: country)
+                        club.addToPlayers(player1)
+                        club.addToPlayers(player2)
+                        club.addToPlayers(player3)
+                        league.addToClubs(club)
+                    }
+                    league.save(flush: true, failOnError: true)
                 }
-                league.save(failOnError: true)
-                league.champion = league.clubs.first()
-                league.save(failOnError: true)
+                league.discard()
+                League otherLeage = League.get(league.id)
+                assert otherLeage != null
+                log.debug("otherLeague found in db: ${league}")
+
+                TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+
+                    @Override
+                    public void afterCommit() {
+                        Executor executor = Executors.newFixedThreadPool(1)
+                        executor.execute(new GetNode(league.id, league.class))
+                    }
+                })
+
+                //league.champion = league.clubs.first()
+                //league.save(failOnError: true)
             }
 
             Club barcelona = Club.findByName("FC Barcelona")
+
             barcelona.rival = Club.findByName("Real Madrid CF")
             barcelona.save(failOnError: true)
             barcelona.discard()
             Club nonCachedBarcelona = Club.findByName("FC Barcelona")
-            assert nonCachedBarcelona.rival == Club.findByName("Real Madrid CF")
+            //assert nonCachedBarcelona.rival == Club.findByName("Real Madrid CF")
         }
 
 //		String query = "MATCH (n:League) WHERE n.name = {1} RETURN n"
@@ -74,3 +99,23 @@ class BootStrap {
                 "French Ligue 1"        : ["Paris Saint-Germain", "Olympique Lyonnais", "Olympique de Marseille", "AS Monaco FC", "LOSC Lille", "FC Girondins de Bordeaux", "AS Saint-Étienne", "EA Guingamp", "Montpellier Hérault SC", "Stade Rennais FC", "OGC Nice", "FC Sochaux-Montbéliard"],
                 "German Bundesliga"     : ["FC Bayern München", "Borussia Dortmund", "FC Schalke 04", "Bayer 04 Leverkusen", "Hannover 96", "VfL Wolfsburg", "VfL Borussia Mönchengladbach", "Eintracht Frankfurt", "VfB Stuttgart", "SC Freiburg", "FC Augsburg", "1. FSV Mainz 05"]]
 }
+
+public class GetNode implements Runnable {
+
+    private Long id
+    private Class clazz
+
+    public GetNode(Long id, Class clazz) {
+        this.id = id
+        this.clazz = clazz
+    }
+
+    public void run() {
+        Club.withTransaction {
+            log.debug("Looking for ${id} of ${clazz}")
+            def nodeById = clazz.get(this.id)
+            assert nodeById != null
+        }
+    }
+}
+
