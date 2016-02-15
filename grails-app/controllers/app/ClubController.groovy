@@ -45,6 +45,16 @@ class ClubController {
         respond club
     }
 
+    @Transactional(readOnly = true)
+    def validateManualBinding() {
+        Club club = Club.get(params.id)
+        club.properties = request
+
+        club.validate()
+
+        respond club
+    }
+
     def addPlayer() {
         Club club = Club.list().get(0)
         club.name = club.name + "a"
