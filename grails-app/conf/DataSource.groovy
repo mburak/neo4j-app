@@ -16,6 +16,8 @@ hibernate {
 
 grails {
     neo4j {
+        type = "embedded"
+        location = "data"
         options = [
             remote_shell_enabled      : 'true',
             allow_store_upgrade       : 'true',
@@ -30,6 +32,12 @@ grails {
 // environment specific settings
 environments {
     development {
+        grails {
+            neo4j {
+                type = "embedded"
+                location = "data"
+            }
+        }
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"

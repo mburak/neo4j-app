@@ -17,11 +17,13 @@ class Club extends AbstractGraphDomain {
 
     static belongsTo = [league: League]
 
-    static hasMany = [players: Player]
+    static hasMany = [players   : Player,
+                      attributes: Attribute]
 
     static constraints = {
         name blank: false, unique: true
         country nullable: true
+        attributes nullable: true
     }
 
     static transients = ['big']

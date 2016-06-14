@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger
 import org.springframework.transaction.support.TransactionSynchronizationAdapter
 import org.springframework.transaction.support.TransactionSynchronizationManager
 
-import org.neo4j.graphdb.event.TransactionData
-import org.neo4j.graphdb.event.TransactionEventHandler
+//import org.neo4j.graphdb.event.TransactionData
+//import org.neo4j.graphdb.event.TransactionEventHandler
 
 class BootStrap {
 
@@ -34,25 +34,25 @@ class BootStrap {
             assert Club.count() == totalClubs
         })
 
-        graphDatabaseService.registerTransactionEventHandler(
-            new TransactionEventHandler<Void>() {
-
-                @Override
-                public Void beforeCommit(TransactionData data) throws Exception {
-                    log.info("${befCmCount.incrementAndGet()} - Committing transaction.")
-                    return null
-                }
-
-                @Override
-                public void afterCommit(TransactionData data, Void state) {
-                    log.info("${aftCmCount.incrementAndGet()} - Committed with transaction")
-                }
-
-                @Override
-                public void afterRollback(TransactionData data, Void state) {
-                    log.info("${aftRbCount.incrementAndGet()} - Transaction rolled back")
-                }
-            })
+//        graphDatabaseService.registerTransactionEventHandler(
+//            new TransactionEventHandler<Void>() {
+//
+//                @Override
+//                public Void beforeCommit(TransactionData data) throws Exception {
+//                    log.info("${befCmCount.incrementAndGet()} - Committing transaction.")
+//                    return null
+//                }
+//
+//                @Override
+//                public void afterCommit(TransactionData data, Void state) {
+//                    log.info("${aftCmCount.incrementAndGet()} - Committed with transaction")
+//                }
+//
+//                @Override
+//                public void afterRollback(TransactionData data, Void state) {
+//                    log.info("${aftRbCount.incrementAndGet()} - Transaction rolled back")
+//                }
+//            })
     }
 
     def destroy = {

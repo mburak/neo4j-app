@@ -38,30 +38,34 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenCentral()
 
+        mavenRepo "http://repo.grails.org/grails/libs-snapshots-local/"
+
         mavenRepo "http://repo.grails.org/grails/core"
     }
 
-    def neo4jVersion = "2.3.2"
+    def neo4jVersion = "3.0.2"
 
     dependencies {
         // Neo4j-shell
         runtime "org.neo4j:neo4j-shell:$neo4jVersion"
 
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+
+        provided 'org.neo4j.test:neo4j-harness:3.0.2'
     }
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.55.3" // or ":tomcat:8.0.22"
+        build ":tomcat:8.0.30"
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:2.5.7"
 
-		compile ":neo4j:5.0.0.BUILD-SNAPSHOT"
+		compile ":neo4j:6.0.0.BUILD-SNAPSHOT"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:5.0.0.BUILD-SNAPSHOT"
+        runtime ":hibernate4:6.0.0.BUILD-SNAPSHOT"
     }
 }
