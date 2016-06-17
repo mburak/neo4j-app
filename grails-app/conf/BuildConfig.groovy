@@ -67,5 +67,7 @@ grails.project.dependency.resolution = {
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:6.0.0.BUILD-SNAPSHOT"
+
+        test ":build-test-data:2.4.0"
     }
 }
