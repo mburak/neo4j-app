@@ -72,11 +72,17 @@ class BootStrap {
                 League league = new League(name: entry.key).addToTags(Tag.findByName("UEFA"))
                 League.withTransaction {
                     List<String> clubs = entry.value
-                    clubs?.each() { String name ->
+                    clubs?.eachWithIndex{ String name, int i ->
                         Player player1 = new Player(name: "Messi", nationality: new NativeNationality(name: 'ARG'))
                         Player player2 = new Player(name: "Ronaldo", nationality: new NativeNationality(name: 'POR'))
                         Player player3 = new Player(name: "Neymar")
                         Club club = new Club(name: name, big: 'yeah', country: country)
+                        if (i % 2 == 0) {
+                            club.captain = player1
+                        }
+                        else {
+                            club.captain = player2
+                        }
                         club.addToPlayers(player1)
                         club.addToPlayers(player2)
                         club.addToPlayers(player3)
@@ -89,16 +95,16 @@ class BootStrap {
                 assert otherLeage != null
                 log.debug("otherLeague found in db: ${league}")
 
-                TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
-
-                    @Override
-                    public void afterCommit() {
-                        new GetNode(league.id, league.class).run()
-                        log.debug("runned runnable on same thead")
-                        Executor executor = Executors.newFixedThreadPool(1)
-                        executor.execute(new GetNode(league.id, league.class))
-                    }
-                })
+//                TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+//
+//                    @Override
+//                    public void afterCommit() {
+//                        new GetNode(league.id, league.class).run()
+//                        log.debug("runned runnable on same thead")
+//                        Executor executor = Executors.newFixedThreadPool(1)
+//                        executor.execute(new GetNode(league.id, league.class))
+//                    }
+//                })
 
                 //league.champion = league.clubs.first()
                 //league.save(failOnError: true)

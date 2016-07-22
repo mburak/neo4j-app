@@ -49,6 +49,8 @@ grails.project.dependency.resolution = {
         // Neo4j-shell
         runtime "org.neo4j:neo4j-shell:$neo4jVersion"
 
+        runtime "org.hibernate:hibernate-ehcache:4.3.10.Final"
+
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
 
         provided 'org.neo4j.test:neo4j-harness:3.0.2'
@@ -62,6 +64,8 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:2.5.7"
+        compile ":spring-security-core:2.0.0"
+        compile ":rest-client-builder:2.1.1"
 
 		compile ":neo4j:6.0.0.BUILD-SNAPSHOT"
 
