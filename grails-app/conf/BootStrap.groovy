@@ -86,6 +86,8 @@ class BootStrap {
                         club.addToPlayers(player1)
                         club.addToPlayers(player2)
                         club.addToPlayers(player3)
+
+                        club.captains = [player1, player2]
                         league.addToClubs(club)
                     }
                     league.save(flush: true, failOnError: true)
@@ -113,6 +115,7 @@ class BootStrap {
             Club barcelona = Club.findByName("FC Barcelona")
 
             barcelona.rival = Club.findByName("Real Madrid CF")
+            barcelona.captains = []
             barcelona.save(failOnError: true)
             barcelona.discard()
             Club nonCachedBarcelona = Club.findByName("FC Barcelona")
