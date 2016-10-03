@@ -11,4 +11,10 @@ public class UefaService {
     public dummy() {
         log.debug "Dummy service..."
     }
+
+    public createCounter() {
+        Counter counter = new Counter()
+        counter.count = new Date().time
+        counter.save()
+    }
 }

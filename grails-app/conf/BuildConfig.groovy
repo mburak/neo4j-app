@@ -43,7 +43,7 @@ grails.project.dependency.resolution = {
         mavenRepo "http://repo.grails.org/grails/core"
     }
 
-    def neo4jVersion = "3.0.3"
+    def neo4jVersion = "3.0.5"
 
     dependencies {
         // Neo4j-shell
@@ -67,10 +67,10 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:2.0.0"
         compile ":rest-client-builder:2.1.1"
 
-		compile ":neo4j:6.0.0.RC1"
+		compile ":neo4j:6.0.0"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:6.0.0.RC1"
+        runtime ":hibernate4:6.0.0"
 
         test ":build-test-data:2.4.0"
     }
