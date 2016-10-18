@@ -134,10 +134,10 @@ class BootStrap {
             Club barcelona = Club.findByName("FC Barcelona")
 
             barcelona.rival = Club.findByName("Real Madrid CF")
-            barcelona.captains.clear()
+//            barcelona.captains.clear()
             barcelona.save(failOnError: true)
             barcelona.discard()
-            Club nonCachedBarcelona = Club.findByName("FC Barcelona")
+            //Club nonCachedBarcelona = Club.findByName("FC Barcelona")
             //assert nonCachedBarcelona.rival == Club.findByName("Real Madrid CF")
         }
         else {
