@@ -83,4 +83,8 @@ class LeagueController {
 
         respond leagues
     }
+
+    def addClubs(String name, String ids) {
+        uefaService.createLeague(name, Arrays.asList(ids.split("\\s*,\\s*")))
+    }
 }

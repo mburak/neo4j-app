@@ -1,6 +1,7 @@
 import app.GormEventsListener
 import app.OtherListener
 import app.SessionListener
+import app.TxEventAdapter
 
 // Place your Spring DSL code here
 beans = {
@@ -8,4 +9,6 @@ beans = {
 
     gormEventsListener(GormEventsListener)
     otherListener(OtherListener, ref("neo4jDatastore"))
+
+    txEventAdapter(TxEventAdapter)
 }

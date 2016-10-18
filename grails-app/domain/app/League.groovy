@@ -21,6 +21,8 @@ class League extends AbstractLeague {
     //	tags fetch: "eager"
     //}
     static mapping = {
+        dynamicAssociations true
+
         labels { GraphPersistentEntity pe, instance ->
             "`${instance?.tags?.findAll()?.collect { it.name }?.join(',')}`"
         }

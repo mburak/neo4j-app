@@ -107,7 +107,7 @@ log4j.main = {
           'org.hibernate',
           'net.sf.ehcache.hibernate'
 
-    debug 'app',//'grails.app',
+    debug 'app','grails.app',
           'org.grails.datastore.gorm.neo4j'
 //          'org.grails.datastore.gorm.neo4j.engine',
 //          'org.grails.datastore.gorm.neo4j.engine.RelationshipPendingDelete'

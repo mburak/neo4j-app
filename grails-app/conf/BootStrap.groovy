@@ -1,9 +1,12 @@
 import app.Club
+import app.Counter
 import app.Country
 import app.League
 import app.NativeNationality
 import app.Player
 import app.Tag
+import app.TagDefinition
+import app.TxEventAdapter
 
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
@@ -60,14 +63,28 @@ class BootStrap {
     }
 
     private void initUEFA() {
+        def tagIds = []
         if (Tag.count() == 0) {
             tags.each { String tag ->
-                new Tag(name: tag).save()
+                Counter counter = new Counter(count: 5).save()
+                TagDefinition tagDef = new TagDefinition(definition: "def", counter: counter)
+                tagDef.otherCount = counter
+                tagDef.save()
+                Tag t = new Tag(name: tag, defintion: tagDef)
+                t.dynamicDefinition = tagDef
+                t.save(flush: true)
+                tagIds << t.id
             }
+            Tag.findByName("UEFA").dynamicDefinition.aTag = new Tag(name: "MASTER_TAG").save()
+
+        }
+
+        Country country = null
+        if (Country.count() == 0) {
+            country = new Country(name: 'Argentina').save()
         }
 
         if (League.count() == 0) {
-            Country country = new Country(name: 'Argentina').save()
             uefa.each() { entry ->
                 League league = new League(name: entry.key).addToTags(Tag.findByName("UEFA"))
                 League.withTransaction {
@@ -97,12 +114,14 @@ class BootStrap {
                 assert otherLeage != null
                 log.debug("otherLeague found in db: ${league}")
 
+                TransactionSynchronizationManager.registerSynchronization(new TxEventAdapter())
+
 //                TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
-//
+
 //                    @Override
 //                    public void afterCommit() {
+//                        log.debug("running after commit")
 //                        new GetNode(league.id, league.class).run()
-//                        log.debug("runned runnable on same thead")
 //                        Executor executor = Executors.newFixedThreadPool(1)
 //                        executor.execute(new GetNode(league.id, league.class))
 //                    }
@@ -115,7 +134,7 @@ class BootStrap {
             Club barcelona = Club.findByName("FC Barcelona")
 
             barcelona.rival = Club.findByName("Real Madrid CF")
-            barcelona.captains = []
+            barcelona.captains.clear()
             barcelona.save(failOnError: true)
             barcelona.discard()
             Club nonCachedBarcelona = Club.findByName("FC Barcelona")
@@ -127,6 +146,15 @@ class BootStrap {
             barcelona.save()
         }
 
+//        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+//
+//            @Override
+//            public void afterCommit() {
+//                uefaService.createLeague("Liga de Argentina", tagIds)
+//            }
+//        })
+
+
 //		String query = "MATCH (n:League) WHERE n.name = {1} RETURN n"
 //		League spaLeague = League.find(query, ["Spanish Liga"])
 //		log.debug("Fetched league: ${spaLeague.name}")
@@ -136,7 +164,7 @@ class BootStrap {
         Club.where {}.deleteAll()
     }
 
-    def tags = ["UEFA"]
+    def tags = ["UEFA", "MORE", "SOCCER"]
 
     def uefa = ["English Premier League": ["Chelsea FC", "Arsenal FC", "Manchester City FC", "Manchester United FC", "Tottenham Hotspur FC", "Liverpool FC", "Newcastle United FC", "Everton FC", "Stoke City FC", "Swansea City AFC", "Birmingham City FC", "Fulham FC", "Wigan Athletic FC", "Southampton FC", "Hull City AFC", "West Ham United FC"],
                 "Spanish Liga"          : ["Real Madrid CF", "FC Barcelona", "Club Atlético de Madrid", "Valencia CF", "Sevilla FC", "Athletic Club", "Málaga CF", "Villarreal CF", "Levante UD", "Real Betis Balompié", "Real Sociedad de Fútbol"],
