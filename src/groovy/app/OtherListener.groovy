@@ -5,7 +5,9 @@ import org.apache.commons.logging.LogFactory
 import org.grails.datastore.mapping.core.Datastore
 import org.grails.datastore.mapping.engine.event.AbstractPersistenceEvent
 import org.grails.datastore.mapping.engine.event.AbstractPersistenceEventListener
+import org.grails.datastore.mapping.engine.event.EventType
 import org.grails.datastore.mapping.engine.event.PostInsertEvent
+import org.grails.datastore.mapping.engine.event.PreInsertEvent
 
 import org.springframework.context.ApplicationEvent
 
@@ -21,14 +23,26 @@ class OtherListener extends AbstractPersistenceEventListener {
 
     @Override
     protected void onPersistenceEvent(AbstractPersistenceEvent event) {
-        log.debug("[on Event ${event.eventType.name()}] Creating counter...")
-        uefaService.createCounter()
-        log.debug("[on Event ${event.eventType.name()}] counter created.")
+        log.debug("[on Event ${event.eventType.name()}]")
+//        if (event.eventType == EventType.PostInsert) {
+//            log.debug("[on Event ${event.eventType.name()}] Creating counter...")
+//            uefaService.createCounter()
+//            log.debug("[on Event ${event.eventType.name()}] counter created.")
+//        } else
+        if (event.eventType == EventType.PreInsert && !(event.entityObject instanceof Counter)) {
+            log.debug("[on Event ${event.eventType.name()}] Creating counter for ${event.entity.name}...")
+            Counter.withNewSession {
+                Counter counter = new Counter()
+                counter.name = "PreInsert ${event.entity.name}"
+                counter.count = new Date().time
+                counter.save()
+            }
+        }
     }
 
     @Override
     boolean supportsEventType(Class<? extends ApplicationEvent> aClass) {
-        return PostInsertEvent.isAssignableFrom(aClass)
+        return PostInsertEvent.isAssignableFrom(aClass) || PreInsertEvent.isAssignableFrom(aClass)
     }
 
     private static UefaService getUefaService() {
