@@ -67,10 +67,10 @@ grails.project.dependency.resolution = {
 //        compile ":spring-security-core:2.0.0"
         compile ":rest-client-builder:2.1.1"
 
-		compile ":neo4j:6.0.0"
+		compile ":neo4j:6.0.3.BUILD-SNAPSHOT"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:6.0.0"
+        runtime ":hibernate4:6.0.2"
 
         test ":build-test-data:2.4.0"
     }

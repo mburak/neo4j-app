@@ -25,6 +25,10 @@ class LeagueController {
         respond league
     }
 
+    def throwEx() {
+        throw new RuntimeException("run time ex")
+    }
+
 //    def update(League league) {
 //        if (league == null) {
 //            render status: NOT_FOUND
