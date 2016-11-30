@@ -1,6 +1,9 @@
 package app
 
+import org.springframework.validation.Errors
+
 import grails.transaction.Transactional
+import grails.validation.ValidationException
 
 @Transactional
 public class UefaService {
@@ -30,5 +33,15 @@ public class UefaService {
         league.tagDefCount = league.tags?.first()?.dynamicDefinition?.aTag
 
         league.save(validate: false)
+    }
+
+    public Club saveClub(Club club) {
+        if (club?.validate()) {
+            return club.save(validate: false)
+        }
+        else {
+            log.error("ERROR: Error saving club: ${club}")
+            throw new ValidationException('invalid club', (Errors) club.errors)
+        }
     }
 }

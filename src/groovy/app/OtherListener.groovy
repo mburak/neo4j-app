@@ -7,6 +7,7 @@ import org.grails.datastore.mapping.engine.event.AbstractPersistenceEvent
 import org.grails.datastore.mapping.engine.event.AbstractPersistenceEventListener
 import org.grails.datastore.mapping.engine.event.EventType
 import org.grails.datastore.mapping.engine.event.PostInsertEvent
+import org.grails.datastore.mapping.engine.event.PostUpdateEvent
 import org.grails.datastore.mapping.engine.event.PreInsertEvent
 
 import org.springframework.context.ApplicationEvent
@@ -29,20 +30,22 @@ class OtherListener extends AbstractPersistenceEventListener {
 //            uefaService.createCounter()
 //            log.debug("[on Event ${event.eventType.name()}] counter created.")
 //        } else
-        if (event.eventType == EventType.PreInsert && !(event.entityObject instanceof Counter)) {
+        if ((event.eventType == EventType.PostInsert || event.eventType == EventType.PostUpdate) && !(event.entityObject instanceof Counter)) {
             log.debug("[on Event ${event.eventType.name()}] Creating counter for ${event.entity.name}...")
             Counter.withNewSession {
-                Counter counter = new Counter()
-                counter.name = "PreInsert ${event.entity.name}"
-                counter.count = new Date().time
-                counter.save()
+                Counter.withTransaction {
+                    Counter counter = new Counter()
+                    counter.name = "PreInsert ${event.entity.name}"
+                    counter.count = new Date().time
+                    counter.save()
+                }
             }
         }
     }
 
     @Override
     boolean supportsEventType(Class<? extends ApplicationEvent> aClass) {
-        return PostInsertEvent.isAssignableFrom(aClass) || PreInsertEvent.isAssignableFrom(aClass)
+        return PostInsertEvent.isAssignableFrom(aClass) || PreInsertEvent.isAssignableFrom(aClass) || PostUpdateEvent.isAssignableFrom(aClass)
     }
 
     private static UefaService getUefaService() {

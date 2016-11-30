@@ -45,6 +45,14 @@ class ClubController {
         respond club
     }
 
+    @Transactional
+    def removeCountry(Club club) {
+        club.country = null
+        club.save(flush: true)
+
+        respond club
+    }
+
     @Transactional(readOnly = true)
     def validateManualBinding() {
         Club club = Club.get(params.id)

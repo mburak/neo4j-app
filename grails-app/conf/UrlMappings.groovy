@@ -12,6 +12,7 @@ class UrlMappings {
 		"/clubs/$id/validateManualBinding"(controller: "club", action: "validateManualBinding", method: "PUT")
 		"/clubs/addPlayer"(controller: "club", action: "addPlayer")
 		"/leagues/addClubs"(controller: "league", action: "addClubs")
+		"/clubs/$id/removeCountry"(controller: "club", action: "removeCountry", method: "GET")
 
         "500"(view:'/error')
 	}
