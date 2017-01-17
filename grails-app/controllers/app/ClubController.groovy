@@ -70,4 +70,10 @@ class ClubController {
         club.validate()
     }
 
+    def updatePlayers() {
+        Player.list().each { Player player ->
+            player.formerClub = 'another club'
+        }
+    }
+
 }

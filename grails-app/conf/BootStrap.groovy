@@ -91,8 +91,23 @@ class BootStrap {
                     List<String> clubs = entry.value
                     clubs?.eachWithIndex{ String name, int i ->
                         Player player1 = new Player(name: "Messi", nationality: new NativeNationality(name: 'ARG'))
+                        player1.tag = [Tag.findByName('SOCCER')]
                         Player player2 = new Player(name: "Ronaldo", nationality: new NativeNationality(name: 'POR'))
+                        player2.tag = [Tag.findByName('SOCCER')]
                         Player player3 = new Player(name: "Neymar")
+                        player3.tag = [Tag.findByName('SOCCER')]
+                        Player player4 = new Player(name: "Suarez")
+                        player4.tag = [Tag.findByName('SOCCER')]
+                        Player player5 = new Player(name: "Maradona")
+                        player5.tag = [Tag.findByName('SOCCER')]
+                        Player player6 = new Player(name: "Ibra")
+                        player6.tag = [Tag.findByName('SOCCER')]
+                        Player player7 = new Player(name: "Aguero")
+                        player7.tag = [Tag.findByName('SOCCER')]
+                        Player player8 = new Player(name: "Tevez")
+                        player8.tag = [Tag.findByName('SOCCER')]
+                        Player player9 = new Player(name: "Raul")
+                        player9.tag = [Tag.findByName('SOCCER')]
                         Club club = new Club(name: name, big: 'yeah', country: country)
                         if (i % 2 == 0) {
                             club.captain = player1
@@ -103,6 +118,12 @@ class BootStrap {
                         club.addToPlayers(player1)
                         club.addToPlayers(player2)
                         club.addToPlayers(player3)
+                        club.addToPlayers(player4)
+                        club.addToPlayers(player5)
+                        club.addToPlayers(player6)
+                        club.addToPlayers(player7)
+                        club.addToPlayers(player8)
+                        club.addToPlayers(player9)
 
                         club.captains = [player1, player2]
                         league.addToClubs(club)

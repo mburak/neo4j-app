@@ -11,6 +11,7 @@ class UrlMappings {
 		"/clubs/$id/validate"(controller: "club", action: "validate", method: "PUT")
 		"/clubs/$id/validateManualBinding"(controller: "club", action: "validateManualBinding", method: "PUT")
 		"/clubs/addPlayer"(controller: "club", action: "addPlayer")
+		"/clubs/updatePlayers"(controller: "club", action: "updatePlayers")
 		"/leagues/addClubs"(controller: "league", action: "addClubs")
 		"/clubs/$id/removeCountry"(controller: "club", action: "removeCountry", method: "GET")
 
