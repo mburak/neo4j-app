@@ -15,6 +15,7 @@ class UrlMappings {
 		"/leagues/addClubs"(controller: "league", action: "addClubs")
 		"/clubs/$id/removeCountry"(controller: "club", action: "removeCountry", method: "GET")
 		"/clubs/$id/removeCaptain"(controller: "club", action: "removeCaptain", method: "GET")
+		"/clubs/$id/changeAddress/$newAddress"(controller: "club", action: "changeAddress", method: "GET")
 
         "500"(view:'/error')
 	}

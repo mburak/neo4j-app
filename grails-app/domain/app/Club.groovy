@@ -14,6 +14,7 @@ class Club extends AbstractGraphDomain {
     Date lastUpdated
     String big
     Country country
+    String address
 
     static belongsTo = [league: League]
 
@@ -24,6 +25,7 @@ class Club extends AbstractGraphDomain {
         name blank: false, unique: true
         country nullable: true
         attributes nullable: true
+        address nullabel: true
     }
 
     static transients = ['big']

@@ -85,4 +85,12 @@ class ClubController {
         }
     }
 
+    @Transactional
+    def changeAddress(Club club, String newAddress) {
+        club.address = newAddress
+        club.save(flush: true)
+
+        respond club
+    }
+
 }
