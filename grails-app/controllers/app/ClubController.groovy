@@ -46,6 +46,15 @@ class ClubController {
     }
 
     @Transactional
+    def removeCaptain(Long id) {
+        Club club = Club.findById(id)
+        club.captain = null
+        club.save(flush: true)
+
+        respond club
+    }
+
+    @Transactional
     def removeCountry(Club club) {
         club.country = null
         club.save(flush: true)

@@ -18,14 +18,14 @@ grails {
     neo4j {
         type = "embedded"
         location = "data"
-        options = [
-            remote_shell_enabled      : 'true',
-            allow_store_upgrade       : 'true',
-            relationship_auto_indexing: 'false',
-            node_auto_indexing        : 'false',
-            dump_configuration        : 'true',
-            keep_logical_logs         : 'false'
-        ]
+        embedded {
+            options = [
+//                'dbms.shell.enabled'                   : 'true',
+                'dbms.allow_format_migration'          : 'true',
+                'dbms.tx_log.rotation.retention_policy': 'false',
+                'dbms.pagecache.memory.size'           : '4g'
+            ]
+        }
     }
 }
 
